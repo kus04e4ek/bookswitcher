@@ -1,0 +1,41 @@
+body {
+    font-family: "Arial", sans-serif;  
+    background-color: snow;
+
+    margin: 0px;
+    margin-bottom: 20px;
+}
+
+h1, h2, h3, h4, p {
+    margin: 0px;
+}
+
+input {
+    border: 1px solid salmon;
+    border-radius: 10px;
+
+    padding: 15px;
+}
+
+input:focus {
+    border: 1px solid tomato;
+    outline: none;
+}
+
+button {
+    background-color: salmon;
+    color: white;
+    border: none;
+
+    border-radius: 50vh;
+
+    padding: 14px;
+
+    font-size: 13px;
+    font-weight: normal;
+    text-align: center;
+}
+
+button:hover {
+    background-color: tomato;
+}

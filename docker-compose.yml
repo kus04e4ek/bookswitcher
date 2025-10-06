@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14  # Используем официальный образ PostgreSQL версии 14
+    container_name: postgres-container
+    restart: always
+    environment:
+      POSTGRES_USER: myuser       # Имя пользователя для базы данных
+      POSTGRES_PASSWORD: mypassword  # Пароль пользователя
+      POSTGRES_DB: mydatabase     # Название базы данных
+    ports:
+      - "5432:5432"  # Проброс порта для доступа к PostgreSQL локально
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Храним данные PostgreSQL в volume
+
+  pgadmin:
+    image: dpage/pgadmin4  # Используем официальный образ PgAdmin
+    container_name: pgadmin-container
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com  # Email для входа в PgAdmin
+      PGADMIN_DEFAULT_PASSWORD: adminpassword   # Пароль для входа в PgAdmin
+    ports:
+      - "5050:80"  # Проброс порта для доступа к PgAdmin локально
+    depends_on:
+      - postgres  # PgAdmin будет запускаться только после того, как запустится PostgreSQL
+
+  bookswitcher-go:
+    build:
+      context: .
+      dockerfile: ./go/Dockerfile
+    container_name: bookswitcher-go-container
+    restart: always
+    environment:
+      AUTH_PORT: 4000
+      DB_ADDRESS: postgres://myuser:mypassword@postgres:5432/mydatabase?sslmode=disable
+      SECRET_KEY: Hd893n+,@Wt5sXhTD}yW*DbXZegGk~h?Z&,w#nikr(sNwRl).8
+    expose:
+      - "4000"
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+
+  bookswitcher-java:
+    build:
+      context: .
+      dockerfile: ./java/Dockerfile
+    container_name: bookswitcher-java-container
+    restart: always
+    environment:
+      AUTH_HOST: bookswitcher-go
+      AUTH_PORT: 4000
+      FRONTEND_URL: http://localhost:3000
+      JDBC_URL: jdbc:postgresql://postgres:5432/mydatabase
+      JDBC_USER: myuser
+      JDBC_PASSWORD: mypassword
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - bookswitcher-go
+
+  bookswitcher-react:
+    build: ./react
+    container_name: bookswitcher-react-container
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - bookswitcher-java
+
+volumes:
+  postgres_data:  # Объявляем volume для хранения данных PostgreSQL

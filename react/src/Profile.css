@@ -1,0 +1,14 @@
+#profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+#profile-container > * {
+    width: 900px;
+}
+
+#profile-container > p {
+    text-align: center;
+}

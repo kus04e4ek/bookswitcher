@@ -1,0 +1,39 @@
+syntax = "proto3";
+package user;
+
+option go_package = "internal/proto";
+option java_package = "ru.culab.bookswitcher.proto";
+option java_multiple_files = true;
+
+message LoginDetails {
+    string username = 1;
+    string password = 2;
+}
+
+message RegisterDetails {
+    LoginDetails details = 1;
+    string city = 2;
+}
+
+message UserId {
+    int64 id = 1;
+}
+
+message User {
+    int64 id = 1;
+    string username = 2;
+    string city = 3;
+    bool isAdmin = 4;
+}
+
+message Token {
+    string token = 1;
+}
+
+service UserService {
+    rpc GetToken(LoginDetails) returns (Token);
+    rpc GetUser(Token) returns (User);
+    rpc GetUserById(UserId) returns (User);
+
+    rpc CreateUser(RegisterDetails) returns (Token);
+}

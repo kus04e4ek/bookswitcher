@@ -1,0 +1,24 @@
+#requests-viewer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#requests-viewer > h1 {
+    text-align: center;
+}
+
+#requests-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+#requests-container > * {
+    width: 900px;
+}
+
+#requests-container > p {
+    text-align: center;
+}

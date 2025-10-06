@@ -1,0 +1,14 @@
+#user-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+#user-container > * {
+    width: 900px;
+}
+
+#user-container > p {
+    text-align: center;
+}

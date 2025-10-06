@@ -1,0 +1,25 @@
+nav {
+    background-color: mistyrose;
+    overflow: hidden;
+
+    margin: 0px;
+    margin-bottom: 25px;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    font-weight: bold;
+    text-decoration-line: none;
+    color: gray;
+}
+
+.nav-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}

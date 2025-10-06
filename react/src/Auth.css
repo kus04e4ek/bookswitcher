@@ -1,0 +1,27 @@
+.window {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding-top: 30px;
+    padding: 50px;
+}
+
+#auth-form {
+    width: 500px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#auth-form > h1 {
+    text-align: center;
+}
+
+#auth-form input, #auth-form button {
+    box-sizing: border-box;
+    width: 100%;
+}
